@@ -1,18 +1,26 @@
+import { useState, useEffect, ChangeEvent } from 'react';
 
-import { useState, useEffect } from 'react';
+interface Task {
+  id: number;
+  text: string;
+  completed: boolean;
+  date: string;
+}
+
+type Filter = 'all' | 'active' | 'completed';
 
 export default function HomePage() {
-  const [theme, setTheme] = useState('light');
-  const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState('');
-  const [filter, setFilter] = useState('all');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [input, setInput] = useState<string>('');
+  const [filter, setFilter] = useState<Filter>('all');
 
   useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'light';
+    const savedTheme = (localStorage.getItem('theme') as 'light' | 'dark') || 'light';
     setTheme(savedTheme);
     document.body.setAttribute('data-theme', savedTheme);
 
-    const savedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
+    const savedTasks: Task[] = JSON.parse(localStorage.getItem('tasks') || '[]');
     setTasks(savedTasks);
   }, []);
 
@@ -21,7 +29,7 @@ export default function HomePage() {
   }, [tasks]);
 
   function toggleTheme() {
-    const next = theme === 'dark' ? 'light' : 'dark';
+    const next: 'light' | 'dark' = theme === 'dark' ? 'light' : 'dark';
     setTheme(next);
     document.body.setAttribute('data-theme', next);
     document.body.classList.add('theme-transition');
@@ -33,7 +41,7 @@ export default function HomePage() {
 
   function addTask() {
     if (input.trim()) {
-      const newTask = {
+      const newTask: Task = {
         id: Date.now(),
         text: input.trim(),
         completed: false,
@@ -44,13 +52,13 @@ export default function HomePage() {
     }
   }
 
-  function toggleTask(id) {
+  function toggleTask(id: number) {
     setTasks(tasks.map(t =>
       t.id === id ? { ...t, completed: !t.completed } : t
     ));
   }
 
-  function deleteTask(id) {
+  function deleteTask(id: number) {
     setTasks(tasks.filter(t => t.id !== id));
   }
 
@@ -69,7 +77,7 @@ export default function HomePage() {
       <div>
         <input
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
           placeholder="Новая задача"
         />
         <button className="BTN" onClick={addTask}>Добавить</button>
