@@ -80,7 +80,7 @@ export default function HomePage() {
           onChange={(e: ChangeEvent<HTMLInputElement>) => setInput(e.target.value)}
           placeholder="Новая задача"
         />
-        <button className="BTN" onClick={addTask}>Добавить</button>
+        <button className="filter-btns" onClick={addTask}>Добавить</button>
       </div>
 
       <div className="filter-btns">
@@ -99,7 +99,7 @@ export default function HomePage() {
             />
             <span>{task.text}</span>
             <small>({task.date})</small>
-            <button className="BTN" onClick={() => deleteTask(task.id)}>❌</button>
+            <button className="filter-btns" onClick={() => deleteTask(task.id)}>❌</button>
           </li>
         ))}
       </ul>
