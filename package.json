@@ -2,12 +2,15 @@
   "name": "todo-next-vercel",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
-    "start": "next start",
-    "lint": "eslint"
-  },
+ 
+"scripts": {
+  "dev": "next dev --turbopack",
+  "build": "next build --turbopack",
+  "start": "next start",
+  "lint": "eslint",
+  "export": "next build && next export"
+},
+
   "dependencies": {
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -25,3 +28,4 @@
     "@eslint/eslintrc": "^3"
   }
 }
+
