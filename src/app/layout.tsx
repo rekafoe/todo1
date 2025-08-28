@@ -4,11 +4,11 @@ export const metadata = {
   title: 'To-Do',
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ }) {
   return (
     <html lang="ru">
       <body>
-        {children}
+        {}
       </body>
     </html>
   );
